@@ -6,7 +6,7 @@ function saludoInicial() {
 }
 
 function solicitarDatos1(nombre) {
-    let tiempo = parseInt(prompt(`Hola ${nombre}, a que plazo deseas simular la inversion? El minimo es 30 dias y maximo 365 dias`))
+    let tiempo = parseInt(prompt(`Hola ${nombre}, a que plazo deseas simular la inversion? El minimo es 30 dias y el maximo 365 dias`))
     return tiempo
 
 }
