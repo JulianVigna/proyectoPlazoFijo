@@ -25,13 +25,11 @@ function solicitarDatos3() {
 
 function tnaMensual(parametro1) {
     interes = (((parametro1 / 12) / 100) / 30)
-    console.log(interes)
     return interes
 }
 
 function calculador(interes, importe, plazo) {
     let resultado = (interes * importe * plazo)
-    console.log(resultado)
     return resultado
 
 }
@@ -53,7 +51,8 @@ do {
         let tasa = solicitarDatos3()
         let interes = tnaMensual(tasa)
         let resultado = calculador(interes, importe, plazo)
-        console.log(resultado)
+
+        console.log((`Por la inversion de $ ${importe} con una TNA %${tasa} a ${plazo} dias, el interes que percibiras es $ ${resultado.toFixed(2)}`))
 
         alert(`Por la inversion de $ ${importe} con una TNA %${tasa} a ${plazo} dias, el interes que percibiras es $ ${resultado.toFixed(2)}`)
     }
