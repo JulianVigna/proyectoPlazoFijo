@@ -37,7 +37,7 @@ function calculador(interes, importe, plazo) {
 }
 
 function saludoDespedida(nombre) {
-    alert(`Hasta luego ${nombre}!!`)
+    alert(`Hasta luego ${nombre} !!`)
 
 }
 
