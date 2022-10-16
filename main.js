@@ -19,7 +19,7 @@ function solicitarDatos2() {
 
 function solicitarDatos3() {
 
-    let tasa = parseInt(prompt(`Ingrese TNA para simulacion`))
+    let tasa = parseInt(prompt(`Ingrese TNA (Tasa Nominal Anual) para simulacion`))
     return tasa
 }
 
