@@ -28,7 +28,7 @@ class plazoFijo {
 function nuevoPlazoFijo(array){
     
     let montoIngresado = parseInt(prompt(`Ingrese el importe que desea invertir en Plazo Fijo`))
-    let plazoIngresado = parseInt(prompt(`A que plazo deseas simular la inversion? El minimo es 30 dias y el maximo 365 dias`))
+    let plazoIngresado = parseInt(prompt(`A que plazo deseas simular la inversion?`))
     let tasaIngresada = parseInt(prompt(`Ingrese TNA (Tasa Nominal Anual) para simulacion`))
     let interesParcial = tnaMensual(tasaIngresada)
     let interesFinal = calculador(montoIngresado, plazoIngresado, interesParcial)
