@@ -1,71 +1,126 @@
 
-function saludoInicial() {
-    alert(`Bienvenido a Invert, un simulador de Plazo Fijo !`)
-    let personaIngresada = prompt(`Ingrese su nombre por favor`)
-    return personaIngresada
+function saludoInicial(){
+    alert(`Bienvenido a Invert !
+Un simulador de Plazo Fijo`)
+}
+saludoInicial()
+
+// array
+const cotizaciones = []
+
+// Funcion constructora de plazo fijo
+class plazoFijo {
+    constructor(id, monto, plazo, tasa, interes){
+
+        this.id = id
+        this.monto = monto
+        this.plazo = plazo
+        this.tasa = tasa 
+        this.interes = interes
+    }
+    mostrarData(){
+        console.log(`Simulacion Nª ${this.id}: Por $${this.monto}a ${this.plazo} con la TNA%${this.tasa} recibiras un interes de $${this.interes} `)
+    }
 }
 
-function solicitarDatos1(nombre) {
-    let tiempo = parseInt(prompt(`Hola ${nombre}, a que plazo deseas simular la inversion? El minimo es 30 dias y el maximo 365 dias`))
-    return tiempo
+// Construccion de opcion 1 
 
+function nuevoPlazoFijo(array){
+    
+    let montoIngresado = parseInt(prompt(`Ingrese el importe que desea invertir en Plazo Fijo`))
+    let plazoIngresado = parseInt(prompt(`A que plazo deseas simular la inversion? El minimo es 30 dias y el maximo 365 dias`))
+    let tasaIngresada = parseInt(prompt(`Ingrese TNA (Tasa Nominal Anual) para simulacion`))
+    let interesParcial = tnaMensual(tasaIngresada)
+    let interesFinal = calculador(montoIngresado, plazoIngresado, interesParcial)
+    
+
+    let plazoFijoCreado = new plazoFijo(array.length+1, montoIngresado, plazoIngresado, tasaIngresada, interesFinal)
+    console.log(plazoFijoCreado)
+    array.push(plazoFijoCreado)
+
+    console.log(array)
 }
 
-function solicitarDatos2() {
-
-    let importe = parseInt(prompt(`Ingrese el importe que desea invertir en Plazo Fijo`))
-    return importe
-}
-
-function solicitarDatos3() {
-
-    let tasa = parseInt(prompt(`Ingrese TNA (Tasa Nominal Anual) para simulacion`))
-    return tasa
-}
-
+// funciones para nuevo plazo fijo:
 function tnaMensual(parametro1) {
-    interes = (((parametro1 / 12) / 100) / 30)
+    let interes = (((parametro1 / 12) / 100) / 30)
     return interes
 }
 
 function calculador(interes, importe, plazo) {
     let resultado = (interes * importe * plazo)
-    return resultado
-
+    return resultado.toFixed(2)
 }
 
-function saludoDespedida(nombre) {
-    alert(`Hasta luego ${nombre} !!`)
-
+// Construccion de opcion 2
+function cotizacionesRealizadas(array){
+    for(let opcion of array){
+        console.log(`Simulacion Nª ${opcion.id}: Por $${opcion.monto} a ${opcion.plazo} dias con una TNA %${opcion.tasa} recibiras un interes de $${opcion.interes} `)
+    }
 }
 
+// Construccion de opcion 3 
+function ordenarMayorMenor(array) {
+    console.log(array.sort((a,b) => (b.monto - a.monto)))
+}
 
-let bandera = true
-do {
-    let nombre = saludoInicial()
-    let plazo = solicitarDatos1(nombre)
+// Construccion de opcion 4
 
-    if (plazo >= 30 && plazo <= 365) {
-
-        let importe = solicitarDatos2()
-        let tasa = solicitarDatos3()
-        let interes = tnaMensual(tasa)
-        let resultado = calculador(interes, importe, plazo)
-
-        console.log((`Por la inversion de $ ${importe} con una TNA %${tasa} a ${plazo} dias, el interes que percibiras es $ ${resultado.toFixed(2)}`))
-
-        alert(`Por la inversion de $ ${importe} con una TNA %${tasa} a ${plazo} dias, el interes que percibiras es $ ${resultado.toFixed(2)}`)
+function eliminarCotizacion(array){
+    console.log("A partir del catálogo ingrese el id del libro a eliminar")
+    for(let elem of array){
+        console.log(`Simulacion Nª ${elem.id}: Por $${elem.monto} a ${elem.plazo} dias con una TNA %${elem.tasa} recibiras un interes de $${elem.interes} `)
     }
+    let idEliminar = parseInt(prompt("Ingrese el id a eliminar"))
+    
+    let indices = array.map(ubicacion => ubicacion.id)
+    console.log(indices)
+    
+    let indice = indices.indexOf(idEliminar)
+    console.log(indice)
+    
+    array.splice(indice, 1)
+    console.log(array)
+}
 
+// Menu
+function preguntarOpcion(){
+    let opcion = parseInt( prompt(`Ingrese el numero de opcion que desean realizar:
+        1 - Realizar una nueva simulacion de Plazo Fijo
+        2 - Ver cotizaciones
+        3 - Filtrar cotizaciones de mayor a menor monto
+        4 - Eliminar cotizaciones
+        0 - Salir
+    `)) 
+    menu(opcion)
+}
 
-    else {
-        (alert(`Ingrese un plazo entre 30 y 365 dias`))
-    }
-    let pregunta = prompt(`Deseas simular otro Plazo Fijo?
-    "ESC" para no `)
+function menu (opcionSeleccionada) {
+    switch(opcionSeleccionada){
+    
+        case 0:
+            salir = true
+            alert(`Gracias por visitarnos !`)
 
-    if (pregunta.toUpperCase() == "ESC") {
-        bandera = false
-        saludoDespedida(nombre)
-    }
-} while (bandera)
+        break
+        case 1: nuevoPlazoFijo(cotizaciones)
+
+        break
+        case 2: cotizacionesRealizadas(cotizaciones)
+
+        break
+        case 3: ordenarMayorMenor(cotizaciones)
+
+        break
+        case 4: eliminarCotizacion(cotizaciones)
+
+        break
+        default:
+            alert(`Ingrese una opcion correcta`)
+
+        }
+}
+let salir = false
+while (salir!= true){
+    preguntarOpcion()
+}
